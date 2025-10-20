@@ -153,6 +153,7 @@ int main(void)
 }
 ```
 
+![Simulation Result](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-20%20222104.png)
 ---
 
 ## How to Read an Input Pin (The `PINx` Register)
