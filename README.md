@@ -19,6 +19,20 @@ The goals of this project are to:
 💡 The aim is to **learn → implement → document** each concept step-by-step.
 
 ---
+## 🗺️ Learning Roadmap
+
+This repository is organized into modules, each focusing on a core peripheral or concept.
+
+| Module | Focus Area | Status |
+| :---: | :--- | :---: |
+| **01** | [GPIO (General Purpose I/O)](./01-GPIO/) | ⏳ In Progress |
+| **02** | [External Interrupts](./02-Interrupts/) | ◻️ Not Started |
+| **03** | [Timers & Counters](./03-Timers/) | ◻️ Not Started |
+| **04** | [PWM (Pulse Width Modulation)](./04-PWM/) | ◻️ Not Started |
+| **05** | [ADC (Analog-to-Digital Converter)](./05-ADC/) | ◻️ Not Started |
+| **06** | [UART Communication](./06-UART/) | ◻️ Not Started |
+| **07** | [I2C Communication](./07-I2C/) | ◻️ Not Started |
+<br>
 
 ## 🛠️ Tools & Environment
 
@@ -39,19 +53,3 @@ You can test most of this code without any physical hardware using these excelle
 * **[SimulIDE](https://www.simulide.com/):** A free, open-source real-time electronic circuit simulator for your desktop.
 
 ---
-
-## 🗺️ Learning Roadmap
-
-This repository is organized into modules, each focusing on a core peripheral or concept.
-
-| Module | Focus Area | Status |
-| :---: | :--- | :---: |
-| **01** | [GPIO (General Purpose I/O)](./01-GPIO/) | ⏳ In Progress |
-| **02** | [External Interrupts](./02-Interrupts/) | ◻️ Not Started |
-| **03** | [Timers & Counters](./03-Timers/) | ◻️ Not Started |
-| **04** | [PWM (Pulse Width Modulation)](./04-PWM/) | ◻️ Not Started |
-| **05** | [ADC (Analog-to-Digital Converter)](./05-ADC/) | ◻️ Not Started |
-| **06** | [UART Communication](./06-UART/) | ◻️ Not Started |
-| **07** | [I2C Communication](./07-I2C/) | ◻️ Not Started |
-<br>
-
