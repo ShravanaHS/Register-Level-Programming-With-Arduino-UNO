@@ -71,4 +71,4 @@ To control these registers, we won't be using high-level functions. Instead, we 
 * **AND (`&`) and OR (`|`)** logic will be the primary tools used to set, clear, and toggle individual bits within the 8-bit registers without disturbing the other bits. This is the core skill required for all subsequent modules.
 
 ### Next Module:
-* [Module 1: GPIO](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/GPIO.md)
+* [Module 1: GPIO](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/GPIO.md)
