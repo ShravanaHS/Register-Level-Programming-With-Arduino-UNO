@@ -1,0 +1,84 @@
+
+## 🗺️ Project Roadmap
+
+This repository will be built one module at a time. The planned learning path is as follows:
+
+1.  **GPIO (General Purpose Input/Output):**
+    * LEDs
+    * 7-Segment Display
+    * LCD
+    * Switches
+2.  **EXTERNAL INTERRUPTS:**
+    * INT0, INT1
+3.  **TIMERS:**
+    * Input and Output Capture
+    * Overflow Interrupt
+4.  **PWM (Pulse Width Modulation):**
+    * LED Dimmer
+5.  **ADC (Analog-to-Digital Converter):**
+    * Potentiometer Connection
+6.  **COMMUNICATION:**
+    * UART
+    * I2C
+
+---
+
+## 🔬 The Target: ATmega328P
+
+The ATmega328P is a popular 8-bit microcontroller. All programming will be done by directly manipulating its hardware registers.
+
+### Core Specifications
+* **Architecture:** 8-bit
+* **Flash Memory (Code):** 32KB
+* **EEPROM (Non-volatile Data):** 1KB
+* **SRAM (RAM):** 2KB
+* **Max Clock Speed:** 20MHz
+
+### Key Peripherals & Features
+This chip comes with a standard set of peripherals that we will be learning to control:
+
+* **GPIO Ports:** 3 (Port B, Port C, Port D)
+* **Timers:** 3 (Timer 0, Timer 1, Timer 2)
+* **ADC:** 10-bit resolution with 8 channels
+* **PWM:** 6 channels
+* **External Interrupts:** 2 (INT 0, INT 1)
+* **Communication Interfaces:** USART, I2C, SPI
+
+---
+
+## 📍 Pin Layout & Port Structure (28-Pin Package)
+
+Understanding the physical pinout is the first step to connecting components.
+
+
+
+### Key System Pins
+* **Pin 1:** `RST` (Reset)
+* **Pin 7:** `VCC` (Digital Supply Voltage)
+* **Pin 20:** `AVCC` (Analog Supply Voltage)
+* **Pin 8, 22:** `GND` (Ground)
+* **Pin 21:** `AREF` (Analog Reference)
+* **Pin 9, 10:** Clock Pins (Used for external crystal on an Arduino board)
+
+### GPIO Port Mapping
+The chip's pins are organized into three ports: B, C, and D.
+
+* **Port B (PB0 - PB7):**
+    * Physical Pins: 14-19
+    * *Note: PB6 and PB7 are used for the external crystal on an Arduino.*
+* **Port C (PC0 - PC6):**
+    * Physical Pins: 23-28
+    * *Note: PC6 is also the `RST` pin.*
+* **Port D (PD0 - PD7):**
+    * Physical Pins: 2-6, 11-13
+
+---
+
+## 💡 Fundamental Concepts
+
+To control these registers, we won't be using high-level functions. Instead, we will rely on **bitwise logic**.
+
+* **AND (`&`) and OR (`|`)** logic will be the primary tools used to set, clear, and toggle individual bits within the 8-bit registers without disturbing the other bits. This is the core skill required for all subsequent modules.
+
+### Next Module:
+* [Module 1: GPIO](./01-GPIO/README.md)
