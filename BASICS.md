@@ -30,7 +30,8 @@ This chip comes with a standard set of peripherals that we will be learning to c
 * **External Interrupts:** 2 (INT 0, INT 1)
 * **Communication Interfaces:** USART, I2C, SPI
 
-  ![ATmega328P Pinout Diagram](https://www.bing.com/images/search?view=detailV2&ccid=4Mt3pVu9&id=173AA64CE7F26A1667F3B0E121FFD1A8F0E1A14F&thid=OIP.4Mt3pVu93VkZVdvFNzpx9gHaGK&mediaurl=https%3a%2f%2fwww.microchip.com%2f_images%2fics%2fmedium-ATmega328P-TQFP-32.png&exph=460&expw=553&q=atmega328p&FORM=IRPRST&ck=6A46E9486789E032A838A8B74A6A808B&selectedIndex=5&itb=1)
+  ![ATmega328P Pinout Diagram](https://i.redd.it/bggdd9srui351.png)
+
 ---
 
 ## 📍 Pin Layout & Port Structure (28-Pin Package)
@@ -59,7 +60,7 @@ The chip's pins are organized into three ports: B, C, and D.
 * **Port D (PD0 - PD7):**
     * Physical Pins: 2-6, 11-13
 
-        ![ATmega328P Pinout Diagram](https://www.bitfoic.com/upload/20231213/25844c0c0e8684550735d6f25012063d.jpg)
+ ![ATmega328P Pinout Diagram](https://www.bitfoic.com/upload/20231213/25844c0c0e8684550735d6f25012063d.jpg)
 
 ---
 
