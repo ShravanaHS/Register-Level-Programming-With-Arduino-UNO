@@ -1,27 +1,13 @@
-
 ## 🗺️ Project Roadmap
 
-This repository will be built one module at a time. The planned learning path is as follows:
+My planned learning path, module by module:
 
-1.  **GPIO (General Purpose Input/Output):**
-    * LEDs
-    * 7-Segment Display
-    * LCD
-    * Switches
-2.  **EXTERNAL INTERRUPTS:**
-    * INT0, INT1
-3.  **TIMERS:**
-    * Input and Output Capture
-    * Overflow Interrupt
-4.  **PWM (Pulse Width Modulation):**
-    * LED Dimmer
-5.  **ADC (Analog-to-Digital Converter):**
-    * Potentiometer Connection
-6.  **COMMUNICATION:**
-    * UART
-    * I2C
-
----
+- **GPIO (General Purpose Input/Output):** LEDs, 7-Segment Display, LCD, Switches
+- **EXTERNAL INTERRUPTS:** INT0, INT1
+- **TIMERS:** Input and Output Capture, Overflow Interrupt
+- **PWM (Pulse Width Modulation):** LED Dimmer
+- **ADC (Analog-to-Digital Converter):** Potentiometer Connection
+- **COMMUNICATION:** UART, I2C
 
 ## 🔬 The Target: ATmega328P
 
