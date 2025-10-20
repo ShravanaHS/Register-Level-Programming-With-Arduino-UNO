@@ -25,7 +25,7 @@ This repository is organized into modules, each focusing on a core peripheral or
 
 | Module | Focus Area | Status |
 | :---: | :--- | :---: |
-| **01** | [GPIO (General Purpose I/O)](./01-GPIO/) | ⏳ In Progress |
+| **01** | [GPIO (General Purpose I/O)](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/GPIO.md) | Completed |
 | **02** | [External Interrupts](./02-Interrupts/) | ◻️ Not Started |
 | **03** | [Timers & Counters](./03-Timers/) | ◻️ Not Started |
 | **04** | [PWM (Pulse Width Modulation)](./04-PWM/) | ◻️ Not Started |
