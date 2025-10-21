@@ -53,6 +53,8 @@ Here is a quick-access list of all the projects documented in this repository, a
 | **UART Communication** | 06 - UART | [Simulate NOW](...) | ◻️ Not Started |
 
 <br>
+
+
 ## 🛠️ Tools & Environment
 
 To follow along, you'll need a few hardware and software tools.
