@@ -327,6 +327,9 @@ The standard 16-pin LCD has the following layout:
 | 15  | A/LED+ | Backlight Anode (+5V)                                                     |
 | 16  | K/LED- | Backlight Cathode (GND)                                                   |
 
+
+ ![LCD Display](https://www.etechnophiles.com/wp-content/uploads/2023/02/16x2-LCD-Pinout-Specifications-Applications.jpg) 
+
 ### 8-bit vs. 4-bit Mode
 
 The HD44780 controller can be operated in two modes:
@@ -364,6 +367,7 @@ These are the basic commands I need to send to the Instruction Register (`RS=0`)
 ### Simulation & Result
 
  ![Wokwi LCD Simulation](images/lcd-sim.png) 
+ -[Simulate NOW](https://wokwi.com/projects/445443029364988929)
 
 ### `main.c` (LCD Interfacing)
 
@@ -374,16 +378,7 @@ The code is broken down into helper functions to make it clean:
 * `lcd_init()`: Runs the sequence of commands to initialize the display.
 
 ```c
-/*
- * Project 3: 16x2 LCD Interfacing in 8-bit Mode
- * Displays strings on both lines of the LCD.
- */
-#define F_CPU 16000000UL // Arduino Uno clock speed is 16MHz
 
-#include <avr/io.h>
-#include <util/delay.h>
-
-// Define control pins
 #define RS_PIN PB0
 #define RW_PIN PB1
 #define EN_PIN PB2
@@ -394,9 +389,9 @@ void lcd_data(unsigned char data);
 void lcd_string(const char *str);
 void lcd_init(void);
 
-int main(void)
+void setup()
 {
-    // --- SETUP ---
+   
     // Configure PORTD (D0-D7) as output for data lines
     DDRD = 0xFF;
     // Configure PORTB pins (RS, RW, EN) as output for control lines
@@ -404,9 +399,9 @@ int main(void)
 
     // Initialize the LCD
     lcd_init();
+}
 
-    // --- LOOP ---
-    while (1)
+void loop()
     {
         lcd_command(0x83); // Move cursor to column 3 of row 1
         lcd_string("Shravana");
@@ -426,7 +421,7 @@ int main(void)
         _delay_ms(2000);
         lcd_command(0x01); // Clear screen
     }
-}
+
 
 // Sends a command to the LCD
 void lcd_command(unsigned char cmd)
