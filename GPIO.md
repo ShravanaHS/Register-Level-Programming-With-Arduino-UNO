@@ -367,7 +367,8 @@ These are the basic commands I need to send to the Instruction Register (`RS=0`)
 ### Simulation & Result
 
  ![Wokwi LCD Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-21%20224514.png) 
- -[Simulate NOW](https://wokwi.com/projects/445443029364988929)
+ 
+ - [Simulate NOW](https://wokwi.com/projects/445443029364988929)
 
 ### `main.c` (LCD Interfacing)
 
