@@ -194,3 +194,99 @@ while(1)
     }
 }
 ```
+
+
+
+---
+
+## 💡 Project 2: Interfacing a 7-Segment Display
+
+The next logical step after blinking a single LED is controlling multiple LEDs at once. A 7-segment display is perfect for this, as it's essentially 7+ LEDs arranged in a figure-8 pattern to display numbers and some letters.
+
+### Working Principle: Common Cathode vs. Common Anode
+
+There are two types of 7-segment displays, and the only difference is the polarity of the LEDs:
+
+1.  **Common Cathode (CC):** All the negative terminals (cathodes) of the LEDs are connected to a single pin. This common pin must be connected to **GND**. To turn on a segment, we send a **HIGH (`1`)** signal to its individual pin.
+2.  **Common Anode (CA):** All the positive terminals (anodes) of the LEDs are connected. This common pin must be connected to **VCC (5V)**. To turn on a segment, we send a **LOW (`0`)** signal to its individual pin (the logic is inverted).
+
+For this project, I will be using a **Common Cathode** display.
+
+
+
+### Hardware Connections
+
+I will use the entire `PORTD` of the ATmega328P to drive the display. This makes the code simple as I can send one byte to control all segments at once.
+
+* A **current-limiting resistor** (typically 220Ω or 330Ω) must be connected in series with each segment pin (a-g) to prevent burning out the LEDs.
+* The **common pin** of the 7-segment display must be connected to **GND**.
+
+| Segment Pin | ATmega328P Pin |
+| :---------: | :------------: |
+|      a      |      PD0       |
+|      b      |      PD1       |
+|      c      |      PD2       |
+|      d      |      PD3       |
+|      e      |      PD4       |
+|      f      |      PD5       |
+|      g      |      PD6       |
+
+<!-- INSERT YOUR 7-SEGMENT DISPLAY IMAGE HERE -->
+<!-- For example: ![Real 7-Segment Display](images/7-seg-real.jpg) -->
+
+### Theory & Segment Mapping
+
+To display a number, I need to send a specific 8-bit pattern to `PORTD`. The bits of the `PORTD` register correspond to the display's segments as follows (bit 7, the most significant bit, will control the decimal point, which we won't use here).
+
+| Bit         | 7  | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| :---------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| **Segment** | dp | g | f | e | d | c | b | a |
+
+Here is the truth table that translates each decimal digit into its 8-bit binary pattern and the final hex code I'll use in my C code array.
+
+| Decimal Number | Binary `(dp g f e d c b a)` | Hex Equivalent |
+| :------------: | :-------------------------: | :------------: |
+|       0        |        `0011 1111`          |     `0x3F`     |
+|       1        |        `0000 0110`          |     `0x06`     |
+|       2        |        `0101 1011`          |     `0x5B`     |
+|       3        |        `0100 1111`          |     `0x4F`     |
+|       4        |        `0110 0110`          |     `0x66`     |
+|       5        |        `0110 1101`          |     `0x6D`     |
+|       6        |        `0111 1100`          |     `0x7C`     |
+|       7        |        `0000 0111`          |     `0x07`     |
+|       8        |        `0111 1111`          |     `0x7F`     |
+|       9        |        `0110 1111`          |     `0x6F`     |
+
+### Simulation & Result
+
+<!-- INSERT YOUR SIMULATION SCREENSHOT HERE -->
+<!-- For example: ![Wokwi Simulation](images/7-seg-sim.png) -->
+<br>
+
+
+
+### `main.c` (0-9 Counter)
+
+This code will configure `PORTD` as an output port and then loop through the array of hex codes, sending each pattern to the display with a delay to create a 0-9 counter.
+
+```c
+//// This array stores the hex codes for digits 0-9.
+unsigned char segment[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7C, 0x07, 0x7F, 0x6F};
+
+void setup() {
+  //set port D as output or Configure all 8 pins of PORTD as outputs.
+// 0xFF is the hexadecimal equivalent of 0b11111111.
+  DDRD = 0xFF;
+}
+
+void loop() {
+  // printing numbers
+  for(int i = 0; i<10; i++){
+    PORTD = segment[i];
+    delay(1000);
+  }
+  delay(2000);
+
+}
+
+```
