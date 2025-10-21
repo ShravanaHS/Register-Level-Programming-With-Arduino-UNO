@@ -231,8 +231,7 @@ I will use the entire `PORTD` of the ATmega328P to drive the display. This makes
 |      f      |      PD5       |
 |      g      |      PD6       |
 
-<!-- INSERT YOUR 7-SEGMENT DISPLAY IMAGE HERE -->
-<!-- For example: ![Real 7-Segment Display](images/7-seg-real.jpg) -->
+![Real 7-Segment Display](https://media.geeksforgeeks.org/wp-content/uploads/20200413202916/Untitled-Diagram-237.png)
 
 ### Theory & Segment Mapping
 
@@ -258,11 +257,9 @@ Here is the truth table that translates each decimal digit into its 8-bit binary
 |       9        |        `0110 1111`          |     `0x6F`     |
 
 ### Simulation & Result
-
-<!-- INSERT YOUR SIMULATION SCREENSHOT HERE -->
-<!-- For example: ![Wokwi Simulation](images/7-seg-sim.png) -->
+![Wokwi Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-21%20195853.png)
 <br>
-
+- [Simulate NOW](https://wokwi.com/projects/445432374040690689)
 
 
 ### `main.c` (0-9 Counter)
