@@ -35,6 +35,24 @@ This repository is organized into modules, each focusing on a core peripheral or
 | **07** | [I2C Communication](./07-I2C/) | ◻️ Not Started |
 <br>
 
+---
+
+## 🚀 Wokwi Simulation Projects
+
+Here is a quick-access list of all the projects documented in this repository, available for live simulation on Wokwi.
+
+| Project | Associated Module | Wokwi Simulation Link | Status |
+| :--- | :---: | :---: | :---: |
+| **Blinking an LED** | 01 - GPIO | [Simulate NOW](https://wokwi.com/projects/445351244852802561) | ✅ Done |
+| **7-Segment Counter** | 01 - GPIO | [Simulate NOW](https://wokwi.com/projects/445432374040690689) | ✅ Done |
+| **LCD Display** | 01 - GPIO | [Simulate NOW](...) | ◻️ Not Started |
+| **Switch Interface** | 01 - GPIO | [Simulate NOW](...) | ◻️ Not Started |
+| **Relay Control** | 01 - GPIO | [Simulate NOW](...) | ◻️ Not Started |
+| **LED Fading** | 04 - PWM | [Simulate NOW](...) | ◻️ Not Started |
+| **ADC Potentiometer Dimmer** | 05 - ADC | [Simulate NOW](...) | ◻️ Not Started |
+| **UART Communication** | 06 - UART | [Simulate NOW](...) | ◻️ Not Started |
+
+<br>
 ## 🛠️ Tools & Environment
 
 To follow along, you'll need a few hardware and software tools.
