@@ -287,3 +287,189 @@ void loop() {
 }
 
 ```
+---
+
+## 💡 Project 3: Interfacing a 16x2 LCD Display
+
+Displaying numbers is useful, but for showing text and full words, I need to use an LCD (Liquid Crystal Display). For this project, I'll interface a standard 16x2 character LCD.
+
+### How a 16x2 LCD Works
+
+A 16x2 LCD can display 16 characters per row, with 2 rows in total. Each character is not a simple segment, but is actually formed by a **5x8 dot matrix** of tiny pixels.
+
+
+Turning individual dots on and off is complex, so these displays have a built-in controller chip to handle that job. The most common one is the **Hitachi HD44780**. My task is simply to send commands and character data to this controller.
+
+The controller has two important registers:
+1.  **Instruction Register (IR):** I send commands here, like "clear the screen," "move the cursor to the second row," or "turn the display on."
+2.  **Data Register (DR):** I send the actual character data (ASCII values) here to be displayed at the current cursor location.
+
+### LCD Memory Map
+
+Each of the 32 character positions has a specific address in the Display Data RAM (DDRAM). To print something at a specific location, I first send a command to move the cursor to that address.
+
+* **Row 1:** Addresses `0x80` to `0x8F`
+* **Row 2:** Addresses `0xC0` to `0xCF`
+
+### LCD Pinout
+
+The standard 16-pin LCD has the following layout:
+
+| Pin | Name | Function                                                                  |
+| :--: | :--: | :------------------------------------------------------------------------ |
+| 1   | VSS  | Ground (0V)                                                               |
+| 2   | VDD  | Power Supply (+5V)                                                        |
+| 3   | V0/VE | Contrast Adjustment (Connected to potentiometer)                          |
+| 4   | **RS** | **Register Select:** `0` = Command (Instruction), `1` = Data              |
+| 5   | **RW** | **Read/Write:** `0` = Write to LCD, `1` = Read from LCD (usually tied to GND) |
+| 6   | **EN** | **Enable:** A HIGH-to-LOW pulse latches the data on the data pins.         |
+| 7-14| D0-D7| **Data Bus Pins:** Carries the 8 bits of data or command.                 |
+| 15  | A/LED+ | Backlight Anode (+5V)                                                     |
+| 16  | K/LED- | Backlight Cathode (GND)                                                   |
+
+### 8-bit vs. 4-bit Mode
+
+The HD44780 controller can be operated in two modes:
+
+* **8-bit Mode:** Uses all 8 data pins (D0-D7). It's faster and the code is simpler, but it requires 8 GPIO pins from the microcontroller just for data.
+* **4-bit Mode:** Uses only 4 data pins (D4-D7). It saves GPIO pins but is slightly slower and more complex to program, as each 8-bit command/data byte must be sent in two 4-bit chunks (called "nibbles").
+
+For this project, I will implement the simpler **8-bit mode**.
+
+### Hardware Connections (ATmega328P)
+
+* The 3 control pins (`RS`, `RW`, `EN`) will be connected to `PORTB`.
+* The 8 data pins (`D0`-`D7`) will be connected to `PORTD`.
+
+| LCD Pin | ATmega328P Pin |
+| :-----: | :------------: |
+|   RS    |      PB0       |
+|   RW    |      PB1       |
+|   EN    |      PB2       |
+|  D0-D7  |     PD0-PD7    |
+
+### Essential LCD Commands
+
+These are the basic commands I need to send to the Instruction Register (`RS=0`) to initialize and control the LCD.
+
+| Hex Code | Command Description                     |
+| :------: | :-------------------------------------- |
+|  `0x38`  | Initialize the LCD in 8-bit mode, 2 lines, 5x8 font. |
+|  `0x0C`  | Turn Display ON, Cursor OFF.            |
+|  `0x06`  | Auto-increment cursor position after each character. |
+|  `0x01`  | Clear the entire display screen.        |
+|  `0x80`  | Force cursor to the beginning of the 1st line. |
+|  `0xC0`  | Force cursor to the beginning of the 2nd line. |
+
+### Simulation & Result
+
+ ![Wokwi LCD Simulation](images/lcd-sim.png) 
+
+### `main.c` (LCD Interfacing)
+
+The code is broken down into helper functions to make it clean:
+* `lcd_command()`: Sends a command byte to the LCD.
+* `lcd_data()`: Sends a data byte (a character) to the LCD.
+* `lcd_string()`: Sends a whole string of characters.
+* `lcd_init()`: Runs the sequence of commands to initialize the display.
+
+```c
+/*
+ * Project 3: 16x2 LCD Interfacing in 8-bit Mode
+ * Displays strings on both lines of the LCD.
+ */
+#define F_CPU 16000000UL // Arduino Uno clock speed is 16MHz
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+// Define control pins
+#define RS_PIN PB0
+#define RW_PIN PB1
+#define EN_PIN PB2
+
+// Function Prototypes
+void lcd_command(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_string(const char *str);
+void lcd_init(void);
+
+int main(void)
+{
+    // --- SETUP ---
+    // Configure PORTD (D0-D7) as output for data lines
+    DDRD = 0xFF;
+    // Configure PORTB pins (RS, RW, EN) as output for control lines
+    DDRB |= (1 << RS_PIN) | (1 << RW_PIN) | (1 << EN_PIN);
+
+    // Initialize the LCD
+    lcd_init();
+
+    // --- LOOP ---
+    while (1)
+    {
+        lcd_command(0x83); // Move cursor to column 3 of row 1
+        lcd_string("Shravana");
+        
+        lcd_command(0xC3); // Move cursor to column 3 of row 2
+        lcd_string("SHS");
+
+        _delay_ms(2000);
+        lcd_command(0x01); // Clear screen
+
+        lcd_command(0x83);
+        lcd_string("engineering");
+        
+        lcd_command(0xC3);
+        lcd_string("HII");
+        
+        _delay_ms(2000);
+        lcd_command(0x01); // Clear screen
+    }
+}
+
+// Sends a command to the LCD
+void lcd_command(unsigned char cmd)
+{
+    PORTD = cmd; // Send command to PORTD
+    PORTB &= ~(1 << RS_PIN); // RS = 0 (command)
+    PORTB &= ~(1 << RW_PIN); // RW = 0 (write)
+
+    PORTB |= (1 << EN_PIN);  // EN = 1 (latch)
+    _delay_ms(5);
+    PORTB &= ~(1 << EN_PIN); // EN = 0
+}
+
+// Sends data (a character) to the LCD
+void lcd_data(unsigned char data)
+{
+    PORTD = data; // Send data to PORTD
+    PORTB |= (1 << RS_PIN);  // RS = 1 (data)
+    PORTB &= ~(1 << RW_PIN); // RW = 0 (write)
+
+    PORTB |= (1 << EN_PIN);  // EN = 1 (latch)
+    _delay_ms(5);
+    PORTB &= ~(1 << EN_PIN); // EN = 0
+}
+
+// Sends a string to the LCD
+void lcd_string(const char *str)
+{
+    while (*str != '\0') // Loop until null terminator
+    {
+        lcd_data(*str);
+        str++;
+    }
+}
+
+// Initializes the LCD
+void lcd_init(void)
+{
+    _delay_ms(20); // Wait for LCD to power on
+    lcd_command(0x38); // 8-bit mode, 2 lines, 5x8 font
+    lcd_command(0x0C); // Display ON, Cursor OFF
+    lcd_command(0x06); // Auto-increment cursor
+    lcd_command(0x01); // Clear display
+    _delay_ms(2);
+}
+```
