@@ -469,3 +469,100 @@ void lcd_init(void)
     _delay_ms(2);
 }
 ```
+---
+---
+
+## 💡 Project 4: Reading a Push Button (Switch Interface)
+
+After controlling outputs (LEDs, LCDs), the next step is to get inputs from the user. The simplest form of input is a push button or switch.
+
+### The Problem: "Floating" Pins
+
+I can't just connect a button to a GPIO pin and leave it at that. When the button is **not** pressed, the input pin is connected to... nothing. This is called a **"floating"** state.
+
+A floating pin is like a tiny antenna; it can randomly pick up electrical noise from the air and report `HIGH` or `LOW` back to the chip, making my program completely unreliable.
+
+To fix this, I must use a **pull-up** or **pull-down** resistor. This resistor ensures the pin is always in a known, stable state (`HIGH` or `LOW`) when the button isn't being pressed.
+
+---
+
+### Logic 1: The Pull-Down Resistor
+
+In a pull-down setup, a resistor (e.g., 10kΩ) connects the GPIO pin directly to **Ground (GND)**. The button is set up to connect the pin to **VCC (5V)** when pressed.
+
+* **Button NOT Pressed:** The resistor "pulls" the pin's voltage down to GND. The pin reads **LOW (0)**.
+* **Button IS Pressed:** The button creates a direct path to VCC, which "overpowers" the resistor. The pin reads **HIGH (1)**.
+
+This logic is straightforward: **LOW = Off, HIGH = On**.
+
+
+
+---
+
+### Logic 2: The Pull-Up Resistor
+
+In a pull-up setup, the resistor connects the GPIO pin directly to **VCC (5V)**. The button is set up to connect the pin to **GND** when pressed.
+
+* **Button NOT Pressed:** The resistor "pulls" the pin's voltage up to VCC. The pin reads **HIGH (1)**.
+* **Button IS Pressed:** The button creates a direct path to GND. The pin reads **LOW (0)**.
+
+This logic is **inverted**: **HIGH = Off, LOW = On**.
+
+
+
+---
+
+### Special Feature: The ATmega328P's Internal Pull-Ups
+
+The ATmega328P (and most modern microcontrollers) has a very useful feature: **built-in pull-up resistors** that I can enable or disable in software. This saves me from having to add an external resistor to my circuit.
+
+I can enable the internal pull-up on any pin by:
+1.  Setting the pin as an **INPUT** (e.g., `DDRD &= ~(1 << PD2);`).
+2.  Writing a `1` to that pin's bit in the **`PORTx`** register (e.g., `PORTD |= (1 << PD2);`).
+
+When I use the internal pull-up, I must use the **inverted logic (Logic 2)** in my code: I check for a **LOW (0)** signal to detect a button press. This is the most common and efficient method.
+
+
+
+#### `main.c` 
+
+This code checks if `PD2` (Arduino Pin 2) is `HIGH`. If it is, it turns on the LED at `PB5` (Arduino Pin 13).
+
+```c
+
+#define F_CPU 16000000UL // 16MHz clock
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define LED_PIN PB5
+#define BUTTON_PIN PIND2
+
+int main(void)
+{
+    // --- SETUP ---
+    // 1. Set LED_PIN (PB5) as an OUTPUT
+    DDRB |= (1 << LED_PIN);
+    
+    // 2. Set BUTTON_PIN (PD2) as an INPUT
+    DDRD &= ~(1 << BUTTON_PIN);
+    
+    // --- LOOP ---
+    while (1)
+    {
+        // Check the status of the PIND register
+        // The logic is: "if the button pin is HIGH..."
+        if (PIND & (1 << BUTTON_PIN))
+        {
+            // Button is pressed (HIGH), turn LED ON
+            PORTB |= (1 << LED_PIN);
+        }
+        else
+        {
+            // Button is not pressed (LOW), turn LED OFF
+            PORTB &= ~(1 << LED_PIN);
+        }
+    }
+}
+
+```
