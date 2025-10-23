@@ -485,7 +485,8 @@ A floating pin is like a tiny antenna; it can randomly pick up electrical noise 
 To fix this, I must use a **pull-up** or **pull-down** resistor. This resistor ensures the pin is always in a known, stable state (`HIGH` or `LOW`) when the button isn't being pressed.
 
 ---
-
+ ![pull up](<img width="750" height="521" alt="image" src="https://github.com/user-attachments/assets/18085af6-9969-42a6-9795-a74250633242" />
+) 
 ### Logic 1: The Pull-Down Resistor
 
 In a pull-down setup, a resistor (e.g., 10kΩ) connects the GPIO pin directly to **Ground (GND)**. The button is set up to connect the pin to **VCC (5V)** when pressed.
@@ -522,6 +523,11 @@ I can enable the internal pull-up on any pin by:
 
 When I use the internal pull-up, I must use the **inverted logic (Logic 2)** in my code: I check for a **LOW (0)** signal to detect a button press. This is the most common and efficient method.
 
+### Simulation & Result
+
+ ![Wokwi LCD Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-21%20224514.png) 
+ 
+ - [Simulate NOW](https://wokwi.com/projects/445443029364988929)
 
 
 #### `main.c` 
@@ -530,40 +536,26 @@ This code checks if `PD2` (Arduino Pin 2) is `HIGH`. If it is, it turns on the L
 
 ```c
 
-#define F_CPU 16000000UL // 16MHz clock
+void setup() {
+  //make PB5 13 AS output
+  //make PD2 2 as inpot
 
-#include <avr/io.h>
-#include <util/delay.h>
-
-#define LED_PIN PB5
-#define BUTTON_PIN PIND2
-
-int main(void)
-{
-    // --- SETUP ---
-    // 1. Set LED_PIN (PB5) as an OUTPUT
-    DDRB |= (1 << LED_PIN);
-    
-    // 2. Set BUTTON_PIN (PD2) as an INPUT
-    DDRD &= ~(1 << BUTTON_PIN);
-    
-    // --- LOOP ---
-    while (1)
-    {
-        // Check the status of the PIND register
-        // The logic is: "if the button pin is HIGH..."
-        if (PIND & (1 << BUTTON_PIN))
-        {
-            // Button is pressed (HIGH), turn LED ON
-            PORTB |= (1 << LED_PIN);
-        }
-        else
-        {
-            // Button is not pressed (LOW), turn LED OFF
-            PORTB &= ~(1 << LED_PIN);
-        }
-    }
+  DDRB |= (1<<DDB5);
+  DDRD &= ~(1<<DDD2);
 }
+
+void loop() {
+  // check the status of PD2 BASED ON that change the output value
+  //for pull down logic
+  if(PIND &(1<<PIND2)){
+    PORTB |= (1<<PB5);
+  }
+  else{
+    PORTB &= ~(1<<PB5);
+  }
+
+}
+
 
 ```
 
@@ -611,6 +603,8 @@ I must use a **transistor (like a BC547 or 2N2222)** to act as a *second* switch
 3.  This allows a much larger current to flow from an external 5V supply, through the relay's coil, and through the transistor's **Collector** and **Emitter** to GND.
 4.  A **flyback diode** (e.g., 1N4007) is placed across the coil to protect the transistor from a voltage spike when the relay turns off.
 
+ ![Relay](https://1.bp.blogspot.com/-kNcTcL4HhlI/X5Bm5h8j-JI/AAAAAAAAByc/ytxkI2e4VboQ4NHQFsDpcV1jHibJmR5BACLcBGAsYHQ/s742/5%2Bpin%2Brelay%2Bwiring%2Bdiagram.png) 
+
 ### Hardware Connections
 
 For this project, I'll control the relay with a push button.
@@ -621,6 +615,11 @@ For this project, I'll control the relay with a push button.
 * **High-Voltage Device:** Connected to the COM and NO (Normally Open) terminals.
 
 ### Simulation & Result
+
+ ![Wokwi LCD Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-21%20224514.png) 
+ 
+ - [Simulate NOW](https://wokwi.com/projects/445443029364988929)
+
 
 
 
