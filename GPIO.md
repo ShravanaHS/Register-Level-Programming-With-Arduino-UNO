@@ -485,8 +485,7 @@ A floating pin is like a tiny antenna; it can randomly pick up electrical noise 
 To fix this, I must use a **pull-up** or **pull-down** resistor. This resistor ensures the pin is always in a known, stable state (`HIGH` or `LOW`) when the button isn't being pressed.
 
 ---
- ![pull up](<img width="750" height="521" alt="image" src="https://github.com/user-attachments/assets/18085af6-9969-42a6-9795-a74250633242" />
-) 
+ ![pull up](https://github.com/user-attachments/assets/18085af6-9969-42a6-9795-a74250633242) 
 ### Logic 1: The Pull-Down Resistor
 
 In a pull-down setup, a resistor (e.g., 10kΩ) connects the GPIO pin directly to **Ground (GND)**. The button is set up to connect the pin to **VCC (5V)** when pressed.
