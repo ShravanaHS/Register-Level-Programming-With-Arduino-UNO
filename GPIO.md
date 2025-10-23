@@ -1,8 +1,21 @@
-# GPIO (General Purpose Input/Output)
+# Module 1: GPIO (General Purpose Input/Output)
 
-The first practical module! GPIO is the most fundamental concept in microcontrollers. It's how the chip interacts with the physical world—turning on LEDs, reading button presses, and sending signals to other components.
+Welcome to the first practical module! This file covers the theory of GPIO and includes several hands-on projects to practice controlling and reading from the ATmega328P's pins.
 
-My goal here is to master controlling these pins directly by reading and writing to their registers.
+##  Table of Contents
+
+1.  [GPIO Theory](#gpio-theory)
+    * [The 3 Key GPIO Registers](#the-3-key-gpio-registers)
+    * [The Core Skill: Bit Manipulation](#the-core-skill-bit-manipulation)
+    * [How to Read an Input Pin](#how-to-read-an-input-pin-the-pinx-register)
+2.  [Projects](#projects)
+    * [Project 1: Blinking an LED](#-project-1-blinking-an-led)
+    * [Project 2: Interfacing a 7-Segment Display](#-project-2-interfacing-a-7-segment-display)
+    * [Project 3: Interfacing a 16x2 LCD Display](#-project-3-interfacing-a-16x2-lcd-display)
+    * [Project 4: Reading a Push Button (Switch Interface)](#-project-4-reading-a-push-button-switch-interface)
+    * [Project 5: Interfacing a Relay](#-project-5-interfacing-a-relay-controlling-high-power-devices)
+
+---
 
 
 ---
