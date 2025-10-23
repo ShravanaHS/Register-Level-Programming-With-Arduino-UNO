@@ -144,6 +144,9 @@ This project is the perfect demonstration of interrupts.
 *(Note: The code uses `PB5` (Pin 13), the built-in LED, for easy testing. The user prompt also mentioned `PD5`, which would also work fine, just change `DDRB` to `DDRD` and `PORTB` to `PORTD` in the code.)*
 
 ### Simulation & Result
+![Simulation Result](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-20%20222104.png)
+
+- [Simulate NOW](https://wokwi.com/projects/445351244852802561)
 
 ### Full Code 
 ```c
