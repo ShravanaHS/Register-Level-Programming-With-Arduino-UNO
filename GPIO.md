@@ -566,3 +566,109 @@ int main(void)
 }
 
 ```
+
+---
+
+## 💡 Project 5: Interfacing a Relay (Controlling High-Power Devices)
+
+This project is a major step up. So far, I've controlled low-power components like LEDs. But what about controlling a high-voltage device, like a 220V AC light bulb or a fan?
+
+The GPIO pins of the ATmega328P can only provide a tiny amount of current at 5V. Connecting them directly to a high-power device would instantly destroy the chip.
+
+The solution is to use a **Relay**.
+
+### What is a Relay?
+
+A relay is an **electromechanical switch**. It's a way to control a high-power circuit using a low-power signal.
+
+
+
+### How Does a Relay Work?
+
+A relay has two separate parts, electrically isolated from each other:
+
+1.  **The Control Side (Low-Voltage):**
+    * This side has a small **electromagnet (coil)**.
+    * When I send a 5V signal (from my microcontroller) to this coil, it becomes a magnet.
+    * This magnetism *pulls* a metal switch on the other side.
+
+2.  **The Switch Side (High-Voltage):**
+    * This side is just a physical switch, exactly like a light switch on your wall. It has three terminals:
+    * **COM (Common):** The "input" for the high-voltage power.
+    * **NO (Normally Open):** This contact is *disconnected* by default. The high-voltage circuit is OFF. When the coil is energized, the switch is pulled to this position, turning the circuit ON.
+    * **NC (Normally Closed):** This contact is *connected* by default. The high-voltage circuit is ON. When the coil is energized, the switch is pulled *away* from this position, turning the circuit OFF.
+
+By sending a 5V signal to the coil, I can safely open or close a 220V AC circuit.
+
+### The Transistor Driver Circuit
+
+There's one more problem: The relay's coil, while low-voltage, still needs more current (e.g., 50-100mA) than the ATmega328P pin (max 40mA) can safely supply.
+
+I must use a **transistor (like a BC547 or 2N2222)** to act as a *second* switch.
+
+1.  The GPIO pin sends a small, safe signal (5V, ~5mA) to the transistor's **Base**.
+2.  This small signal "opens the gate" of the transistor.
+3.  This allows a much larger current to flow from an external 5V supply, through the relay's coil, and through the transistor's **Collector** and **Emitter** to GND.
+4.  A **flyback diode** (e.g., 1N4007) is placed across the coil to protect the transistor from a voltage spike when the relay turns off.
+
+### Hardware Connections
+
+For this project, I'll control the relay with a push button.
+
+* **Input:** Push Button on `PD7` (Arduino Pin 7), using **pull-down logic**.
+* **Output:** Transistor Base connected (via a 1kΩ resistor) to `PB0` (Arduino Pin 8).
+* **Relay Coil:** Connected to 5V and the transistor's Collector.
+* **High-Voltage Device:** Connected to the COM and NO (Normally Open) terminals.
+
+### Simulation & Result
+
+
+
+
+
+### `main.c` (Button-Controlled Relay)
+
+This code will read the button on `PD7`. If the button is pressed (`HIGH`), it will send a `HIGH` signal to `PB0`, which turns on the transistor, which in turn energizes the relay and switches on the high-voltage device.
+
+```c
+/*
+ * Project 5: Button-Controlled Relay
+ * Reads a push button on PD7 (pull-down) to control a relay
+ * via a transistor on PB0.
+ */
+#define F_CPU 16000000UL // 16MHz clock
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define RELAY_PIN   PB0  // (Arduino Pin 8) -> Transistor Base
+#define BUTTON_PIN  PIND7 // (Arduino Pin 7) -> Button Input
+
+int main(void)
+{
+    // --- SETUP ---
+    // 1. Set RELAY_PIN (PB0) as an OUTPUT
+    DDRB |= (1 << RELAY_PIN);
+    
+    // 2. Set BUTTON_PIN (PD7) as an INPUT
+    DDRD &= ~(1 << BUTTON_PIN);
+    
+    // --- LOOP ---
+    while (1)
+    {
+        // Check the status of the PIND register using pull-down logic
+        if (PIND & (1 << BUTTON_PIN))
+        {
+            // Button is pressed (HIGH), turn Relay ON
+            // (Send 5V to the transistor base)
+            PORTB |= (1 << RELAY_PIN);
+        }
+        else
+        {
+            // Button is not pressed (LOW), turn Relay OFF
+            // (Send 0V to the transistor base)
+            PORTB &= ~(1 << RELAY_PIN);
+        }
+    }
+}
+```
