@@ -204,24 +204,24 @@ ISR(INT1_vect)
 ### Line-by-Line Code Explanation
 
 #### `void setup()`
-```
+```c
 DDRB |= (1 << DDB5);
 ```
 * **Purpose:** Standard GPIO setup. We set the 5th bit of the `DDRB` register.
 * **Result:** `PB5` (Arduino Pin 13) is configured as an **OUTPUT** pin to drive our LED.
-```
+```c
 sei();
 ```
 
 * **Purpose:** This stands for **Set Enable Interrupts**. It is a built-in function from `<avr/interrupt.h>`.
 * **Result:** This function sets the 7th bit of the **Status Register (`SREG`)**, also known as the **Global Interrupt Enable (GIE)** bit. This is the **master switch** for *all* interrupts on the chip. If this is not set, no interrupts will ever run.
-```
+```c
 EIMSK |= (1 << INT0) | (1 << INT1);
 ```
 
 * **Purpose:** This modifies the **External Interrupt Mask Register (`EIMSK`)**.
 * **Result:** We are "un-masking" (enabling) the two interrupts we want to use. We set the `INT0` bit (bit 0) and the `INT1` bit (bit 1) to `1`. Now, the CPU will *specifically* listen for events on `INT0` and `INT1`.
-```
+```c
 EICRA |= (1 << ISC10) | (1 << ISC11) | (1 << ISC00) | (1 << ISC01);
 ```
 * **Purpose:** This modifies the **External Interrupt Control Register A (`EICRA`)**. This register tells the CPU *what kind* of signal to trigger on.
@@ -231,14 +231,14 @@ EICRA |= (1 << ISC10) | (1 << ISC11) | (1 << ISC00) | (1 << ISC01);
 * According to the ATmega328P datasheet, setting these bits to `11` (e.g., `(1<<ISC00) | (1<<ISC01)`) configures the interrupt to trigger on a **rising edge** (when the signal goes from LOW to HIGH). We do this for both `INT0` and `INT1`.
 
 #### `void loop()`
-```
+```c
 void loop() {}
 ```
 * **Purpose:** This is the main program loop.
 * **Result:** It's empty. This perfectly demonstrates that the CPU is not polling or wasting time. It's free to do other tasks (or just idle) while it waits for the hardware to trigger an interrupt.
 
 #### The `ISR`s
-```
+```c
 ISR(INT0_vect)
 {
 PORTB |= (1 < PB5);
@@ -246,7 +246,7 @@ PORTB |= (1 < PB5);
 ```
 * **Purpose:** This is the **Interrupt Service Routine for `INT0`**. `INT0_vect` is a special name (vector) that links this function to the `INT0` hardware.
 * **Result:** When a rising edge is detected on the `PD2` (`INT0`) pin, the CPU *automatically* pauses `loop()` and runs this code. This code sets the `PB5` bit in `PORTB` to `1`, turning the LED **ON**.
-```
+```c
 ISR(INT1_vect)
 {
 PORTB &= ~(1 < PB5);
