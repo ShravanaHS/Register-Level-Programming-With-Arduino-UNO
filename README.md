@@ -41,19 +41,22 @@ This repository is organized into modules, each focusing on a core peripheral or
 
 Here is a quick-access list of all the projects documented in this repository, available for live simulation on Wokwi.
 
-| Project | Associated Module | Wokwi Simulation Link | Status |
+## 🚀 Wokwi Simulation Projects
+
+Here is a quick-access list of all the projects documented in this repository, complete with my technical notes and a live simulation link.
+
+| Project | Module | Explanation (My Notes) | Wokwi Simulation |
 | :--- | :---: | :---: | :---: |
-| **Blinking an LED** | 01 - GPIO | [Simulate NOW](https://wokwi.com/projects/445351244852802561) | ✅ Done |
-| **7-Segment Counter** | 01 - GPIO | [Simulate NOW](https://wokwi.com/projects/445432374040690689) | ✅ Done |
-| **LCD Display** | 01 - GPIO | [Simulate NOW](https://wokwi.com/projects/445443029364988929) | ✅ Done |
-| **Switch Interface** | 01 - GPIO | [Simulate NOW](...) | ◻️ Not Started |
-| **Relay Control** | 01 - GPIO | [Simulate NOW](...) | ◻️ Not Started |
-| **LED Fading** | 04 - PWM | [Simulate NOW](...) | ◻️ Not Started |
-| **ADC Potentiometer Dimmer** | 05 - ADC | [Simulate NOW](...) | ◻️ Not Started |
-| **UART Communication** | 06 - UART | [Simulate NOW](...) | ◻️ Not Started |
+| **Blinking an LED** | 01 - GPIO | [View Notes](GPIO.md#-project-1-blinking-an-led) | [Simulate NOW](https://wokwi.com/projects/445351244852802561) |
+| **7-Segment Counter** | 01 - GPIO | [View Notes](GPIO.md#-project-2-interfacing-a-7-segment-display) | [Simulate NOW](https://wokwi.com/projects/445432374040690689) |
+| **LCD Display** | 01 - GPIO | [View Notes](GPIO.md#-project-3-interfacing-a-16x2-lcd-display) | [Simulate NOW](https://wokwi.com/projects/445443029364988929) |
+| **Switch Interface** | 01 - GPIO | [View Notes](GPIO.md#-project-4-reading-a-push-button-switch-interface) | [Simulate NOW](https://wokwi.com/projects/445627076538241025) |
+| **Relay Control** | 01 - GPIO | [View Notes](GPIO.md#-project-5-interfacing-a-relay-controlling-high-power-devices) | [Simulate NOW](https://wokwi.com/projects/445627485643387905) |
+| **LED Fading** | 04 - PWM | ... | [Simulate NOW](...) |
+| **ADC Potentiometer** | 05 - ADC | ... | [Simulate NOW](...) |
+| **UART Communication** | 06 - UART | ... | [Simulate NOW](...) |
 
 <br>
-
 
 ## 🛠️ Tools & Environment
 
