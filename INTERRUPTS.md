@@ -146,7 +146,7 @@ This project is the perfect demonstration of interrupts.
 ### Simulation & Result
 ![Simulation Result](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-20%20222104.png)
 
-- [Simulate NOW](https://wokwi.com/projects/445351244852802561)
+- [Simulate NOW](https://wokwi.com/projects/445685629186064385)
 
 ### Full Code 
 ```c
