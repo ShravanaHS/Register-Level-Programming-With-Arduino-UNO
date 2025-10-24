@@ -49,8 +49,9 @@ Here is a quick-access list of all the projects documented in this repository, c
 | **LCD Display** | 01 - GPIO | [View Notes](GPIO.md#-project-3-interfacing-a-16x2-lcd-display) | [Simulate NOW](https://wokwi.com/projects/445443029364988929) |
 | **Switch Interface** | 01 - GPIO | [View Notes](GPIO.md#-project-4-reading-a-push-button-switch-interface) | [Simulate NOW](https://wokwi.com/projects/445627076538241025) |
 | **Relay Control** | 01 - GPIO | [View Notes](GPIO.md#-project-5-interfacing-a-relay-controlling-high-power-devices) | [Simulate NOW](https://wokwi.com/projects/445627485643387905) |
-| **LED Fading** | 04 - PWM | ... | [Simulate NOW](...) |
-| **ADC Potentiometer** | 05 - ADC | ... | [Simulate NOW](...) |
+| **LED Toggling Using Interrupts** | 02 - INTERRUPT | ... | [Simulate NOW](...) |
+| **Simple Example** | 02 - INTERRUPT | ... | [Simulate NOW](...) |
+| **Simple Example** | 03 - Timer | ... | [Simulate NOW](...) |
 | **UART Communication** | 06 - UART | ... | [Simulate NOW](...) |
 
 <br>
