@@ -537,7 +537,7 @@ When I use the internal pull-up, I must use the **inverted logic (Logic 2)** in 
 
 ### Simulation & Result
 
- ![Wokwi LCD Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-21%20224514.png) 
+ ![Wokwi pushbutton Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-23%20232537.png) 
  
  - [Simulate NOW](https://wokwi.com/projects/445627076538241025)
 
@@ -628,7 +628,7 @@ For this project, I'll control the relay with a push button.
 
 ### Simulation & Result
 
- ![Wokwi LCD Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-21%20224514.png) 
+ ![Wokwi Relay Simulation](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/Screenshot%202025-10-23%20233200.png) 
  
  - [Simulate NOW](https://wokwi.com/projects/445627485643387905)
 
