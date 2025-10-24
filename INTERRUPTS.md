@@ -69,7 +69,7 @@ The processor is 100% engaged, wasting millions of clock cycles just reading a p
 
 ## The Solution: How Interrupts Save Time
 With an interrupt, our code looks completely different:
-```
+```c
 void setup() {
     // 1. Configure LED pin as output
     // 2. Configure Button pin as an interrupt
