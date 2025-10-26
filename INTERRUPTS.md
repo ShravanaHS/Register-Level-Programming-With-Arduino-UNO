@@ -254,3 +254,6 @@ PORTB &= ~(1 < PB5);
 ```
 * **Purpose:** This is the **Interrupt Service Routine for `INT1`**.
 * **Result:** When a rising edge is detected on the `PD3` (`INT1`) pin, the CPU pauses `loop()` and runs this code. This code clears the `PB5` bit in `PORTB` to `0`, turning the LED **OFF**.
+---
+### Next Module:
+* [Module 3: TIMERS](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/TIMERS.md)
