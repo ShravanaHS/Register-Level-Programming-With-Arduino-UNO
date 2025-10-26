@@ -683,3 +683,5 @@ int main(void)
     }
 }
 ```
+### Next Module:
+* [Module 2: INTERRUPTS](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/INTERRUPTS.md)
