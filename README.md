@@ -51,7 +51,7 @@ Here is a quick-access list of all the projects documented in this repository, c
 | **Relay Control** | 01 - GPIO | [View Notes](GPIO.md#-project-5-interfacing-a-relay-controlling-high-power-devices) | [Simulate NOW](https://wokwi.com/projects/445627485643387905) |
 | **LED Toggling Using Interrupts** | 02 - INTERRUPT | ... | [Simulate NOW](...) |
 | **Simple Example** | 02 - INTERRUPT | ... | [Simulate NOW](...) |
-| **Simple Example** | 03 - Timer | ... | [Simulate NOW](...) |
+| **Simple Example** | 03 - Timer | [View Notes](TIMER.md#-project-1-non-blocking-led-blink-with-timer1-overflow) | [Simulate NOW](https://wokwi.com/projects/445851563987053569) |
 | **UART Communication** | 06 - UART | ... | [Simulate NOW](...) |
 
 <br>
