@@ -13,9 +13,13 @@ Timers are the professional, **non-blocking** solution. A timer is a hardware pe
 5.  [Key Applications](#key-applications)
 6.  [How to Configure a Timer (General Steps)](#how-to-configure-a-timer-general-steps)
 7.  [Project 1: Non-Blocking LED Blink (with Timer1 Overflow)](#-project-1-non-blocking-led-blink-with-timer1-overflow)
-8.  [Line-by-Line Code Explanation](#-Line-by-Line-Code-Explanation)
----
-
+    * [Why Timer1 (16-bit)?](#why-timer1-16-bit)
+    * [Configuring Timer1 for a 1-Second Delay](#configuring-timer1-for-a-1-second-delay)
+    * [Simulation & Result](#simulation--result)
+    * [Full Code (`main.c`)](#full-code-mainc)
+    * [Line-by-Line Code Explanation](#line-by-line-code-explanation)
+  
+    
 ## What is a Timer? (The Kitchen Timer Analogy)
 
 A timer is a peripheral that is, at its heart, a **counter**. It's a special register in the microcontroller that just... counts. I can configure *what* it counts (e.g., CPU clock cycles) and *how fast* it counts.
@@ -233,6 +237,11 @@ Finally, I must turn on the "master switch" for all interrupts.
 
 * `sei();`
 
+### Simulation & Result
+
+
+
+* **[Simulate NOW](https://wokwi.com/projects/445851563987053569)**
 ### Full Code (`main.c`)
 
 ```c
