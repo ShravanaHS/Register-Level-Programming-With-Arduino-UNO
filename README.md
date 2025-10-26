@@ -28,7 +28,7 @@ This repository is organized into modules, each focusing on a core peripheral or
 | **0**  | [Brief Overview and Basics](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/BASICS.md) | Completed |
 | **01** | [GPIO (General Purpose I/O)](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/GPIO.md) | Completed |
 | **02** | [Interrupts](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/INTERRUPTS.md) | Started |
-| **03** | [Timers & Counters](./03-Timers/) | ◻️ Not Started |
+| **03** | [Timers & Counters](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/TIMER.md) | Started |
 | **04** | [PWM (Pulse Width Modulation)](./04-PWM/) | ◻️ Not Started |
 | **05** | [ADC (Analog-to-Digital Converter)](./05-ADC/) | ◻️ Not Started |
 | **06** | [UART Communication](./06-UART/) | ◻️ Not Started |
