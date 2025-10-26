@@ -49,8 +49,7 @@ Here is a quick-access list of all the projects documented in this repository, c
 | **LCD Display** | 01 - GPIO | [View Notes](GPIO.md#-project-3-interfacing-a-16x2-lcd-display) | [Simulate NOW](https://wokwi.com/projects/445443029364988929) |
 | **Switch Interface** | 01 - GPIO | [View Notes](GPIO.md#-project-4-reading-a-push-button-switch-interface) | [Simulate NOW](https://wokwi.com/projects/445627076538241025) |
 | **Relay Control** | 01 - GPIO | [View Notes](GPIO.md#-project-5-interfacing-a-relay-controlling-high-power-devices) | [Simulate NOW](https://wokwi.com/projects/445627485643387905) |
-| **LED Toggling Using Interrupts** | 02 - INTERRUPT | ... | [Simulate NOW](...) |
-| **Simple Example** | 02 - INTERRUPT | ... | [Simulate NOW](...) |
+| **LED Toggling Using Interrupts** | 02 - INTERRUPT | [View Notes](INTERRUPTS.md#-project-1-dual-button-led-control-with-int0--int1) | [Simulate NOW](https://wokwi.com/projects/445685629186064385) |
 | **Simple Example** | 03 - Timer | [View Notes](TIMER.md#-project-1-non-blocking-led-blink-with-timer1-overflow) | [Simulate NOW](https://wokwi.com/projects/445851563987053569) |
 | **UART Communication** | 06 - UART | ... | [Simulate NOW](...) |
 
