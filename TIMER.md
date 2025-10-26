@@ -13,6 +13,7 @@ Timers are the professional, **non-blocking** solution. A timer is a hardware pe
 5.  [Key Applications](#key-applications)
 6.  [How to Configure a Timer (General Steps)](#how-to-configure-a-timer-general-steps)
 7.  [Project 1: Non-Blocking LED Blink (with Timer1 Overflow)](#-project-1-non-blocking-led-blink-with-timer1-overflow)
+8.  [Line-by-Line Code Explanation](#-Line-by-Line-Code-Explanation)
 ---
 
 ## What is a Timer? (The Kitchen Timer Analogy)
@@ -294,3 +295,66 @@ ISR(TIMER1_OVF_vect)
     TCNT1 = 49910;
 }
 ```
+
+
+
+### Line-by-Line Code Explanation
+
+#### `int main(void)` - Setup
+
+DDRB |= (1 << DDB5);
+
+* **Purpose:** Standard GPIO setup. We set the 5th bit of the `DDRB` register.
+* **Result:** `PB5` (Arduino Pin 13) is configured as an **OUTPUT** pin to drive our LED.
+
+TCCR1A = 0x00;
+TCCR1B = 0x00;
+
+* **Purpose:** To clear the Timer/Counter Control Registers for Timer1.
+* **Result:** This sets all bits to `0`, which guarantees the timer is in **"Normal Mode"** (all `WGM` bits are `0`). In this mode, the timer simply counts up to its maximum value (`0xFFFF`) and then overflows.
+
+TCCR1B |= (1 << CS12) | (1 << CS10);
+
+* **Purpose:** To set the prescaler (the timer's speed) for Timer1.
+* **Result:** This sets the `CS12` and `CS10` bits to `1`, while `CS11` remains `0`. This `101` bit pattern selects the **1024 prescaler**. The timer clock is now slowed from 16,000,000 Hz to `16,000,000 / 1024 = 15,625 Hz`.
+
+TCNT1 = 49910;
+
+* **Purpose:** To "preload" the timer's 16-bit counter register.
+* **Result:** Instead of starting to count from 0, the timer starts at **49910**. Since the timer overflows at 65,535, it will now take `65,535 - 49910 = 15,625` ticks to overflow. At 15,625 ticks/second, this will take exactly **1 second**.
+
+TIMSK1 |= (1 << TOIE1);
+
+* **Purpose:** To enable the specific interrupt for the Timer1 overflow event.
+* **Result:** This sets the **Timer Overflow Interrupt Enable (`TOIE1`)** bit in the `TIMSK1` register. This "un-masks" the interrupt, telling the CPU to run the ISR when the timer overflows.
+
+sei();
+
+* **Purpose:** This stands for **Set Enable Interrupts**. It is the "master switch" for all interrupts.
+* **Result:** This function sets the 7th bit of the **Status Register (`SREG`)**, also known as the **Global Interrupt Enable (GIE)** bit. No interrupts will run until this is called.
+
+#### `int main(void)` - Loop
+
+while (1)
+{
+// Do other work...
+}
+
+* **Purpose:** This is the main program loop.
+* **Result:** It's **empty**. This is the key to this project. The CPU is completely free to do other tasks (like read sensors or update an LCD) while the Timer1 hardware runs in the background, handling the LED blinking all by itself.
+
+#### The `ISR`
+
+ISR(TIMER1\_OVF\_vect)
+{
+// 1. Toggle the LED
+PORTB ^= (1 << PB5);
+
+// 2. IMPORTANT: Reload the preload value
+TCNT1 = 49910;
+}
+
+* **Purpose:** This is the **Interrupt Service Routine for Timer1 Overflow**. `TIMER1_OVF_vect` is the special name (vector) that links this function to the hardware event.
+* **Result:** This code runs *automatically* every 1 second.
+    1.  `PORTB ^= (1 << PB5);`: The LED is toggled. The `^` (XOR) operator flips the bit (from 1 to 0, or 0 to 1).
+    2.  `TCNT1 = 49910;`: This is **CRITICAL**. After overflowing, `TCNT1` resets to `0`. This line immediately **reloads the preload value**, so the timer will once again count 15,625 ticks for the *next* 1-second interrupt.
