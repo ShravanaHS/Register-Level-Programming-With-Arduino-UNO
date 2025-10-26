@@ -240,6 +240,7 @@ Finally, I must turn on the "master switch" for all interrupts.
 ### Simulation & Result
 
 
+![Simulation Result](https://github.com/ShravanaHS/Register-Level-Programming-With-Arduino-UNO/blob/main/images/SHS.png)
 
 * **[Simulate NOW](https://wokwi.com/projects/445851563987053569)**
 ### Full Code (`main.c`)
